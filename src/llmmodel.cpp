@@ -83,7 +83,8 @@ void LLMModel::Run(QString text, int port_num)
 
     // 创建顶层的QJsonObject并添加消息数组和stream键
     QJsonObject rootObject;
-    rootObject["model"] = "Qwen/Qwen2.5-3B-Instruct";
+//    rootObject["model"] = "Qwen/Qwen2.5-3B-Instruct";
+    rootObject["model"] = "Qwen/Qwen2.5-Instruct";
     rootObject["messages"] = messagesArray;
     rootObject["stream"] = true;
     rootObject["temperature"] = 0.7;
