@@ -97,22 +97,23 @@ void QmlBridge::handleProcessOutput()
 {
     QByteArray output = m_llm_process.readAllStandardOutput();
     QByteArray errorOutput = m_llm_process.readAllStandardError();
+    output = output + errorOutput;
 
     qDebug() << "Standard Output:" << output;
-    qDebug() << "Standard Error:" << errorOutput;
 
     // 根据输出内容判断进程是否成功启动
     if (output.contains("starting the main loop")) {
         m_llm_loaded = true;
-        emit llmLoadedChanged();
         disconnect(&m_llm_process, &QProcess::readyReadStandardOutput, this, &QmlBridge::handleProcessOutput);
         disconnect(&m_llm_process, &QProcess::readyReadStandardError, this, &QmlBridge::handleProcessOutput);
+        emit llmLoadedChanged();
     }
-    if (errorOutput.length() > 0)
+    if (output.contains("failed to load model"))
     {
         m_llm_loaded = false;
-        emit llmLoadedChanged();
         disconnect(&m_llm_process, &QProcess::readyReadStandardOutput, this, &QmlBridge::handleProcessOutput);
         disconnect(&m_llm_process, &QProcess::readyReadStandardError, this, &QmlBridge::handleProcessOutput);
+        emit llmLoadedChanged();
     }
+
 }
