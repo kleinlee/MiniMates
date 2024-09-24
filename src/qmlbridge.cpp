@@ -104,8 +104,15 @@ void QmlBridge::handleProcessOutput()
     // 根据输出内容判断进程是否成功启动
     if (output.contains("starting the main loop")) {
         m_llm_loaded = true;
-    } else {
-        m_llm_loaded = false;
+        emit llmLoadedChanged();
+        disconnect(&m_llm_process, &QProcess::readyReadStandardOutput, this, &QmlBridge::handleProcessOutput);
+        disconnect(&m_llm_process, &QProcess::readyReadStandardError, this, &QmlBridge::handleProcessOutput);
     }
-    emit llmLoadedChanged();
+    if (errorOutput.length() > 0)
+    {
+        m_llm_loaded = false;
+        emit llmLoadedChanged();
+        disconnect(&m_llm_process, &QProcess::readyReadStandardOutput, this, &QmlBridge::handleProcessOutput);
+        disconnect(&m_llm_process, &QProcess::readyReadStandardError, this, &QmlBridge::handleProcessOutput);
+    }
 }
