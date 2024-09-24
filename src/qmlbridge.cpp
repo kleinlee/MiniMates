@@ -50,7 +50,7 @@ int QmlBridge::loadLLMModel()
 #if defined(Q_OS_WIN)
     QString executablePath = "llama-server.exe";
 #else
-    QString executablePath = "llama-server"; // 对于其他平台，可以根据需要设置
+    QString executablePath = "./llama-server"; // 对于其他平台，可以根据需要设置
 #endif
     if (!QFile::exists(executablePath)) {
         qDebug() << "Executable not found: " << executablePath;
