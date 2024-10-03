@@ -9,7 +9,7 @@ MiniMates 是一款轻量级的图片数字人驱动算法，比liveportrait、E
 
 ## Demo 视频
 ![Video](assets/rotate0.mp4)
-
+<video src="https://github.com/kleinlee/MiniMates/blob/main/assets/rotate0.mp4" controls width="100%"></video>
 ## To Do List
 - 集成至桌面软件
 - 发布训练代码
