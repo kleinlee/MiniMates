@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>resource/main.qml</file>
-        <file>resource/images/huahua.jpg</file>
-    </qresource>
-</RCC>

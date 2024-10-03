@@ -1,0 +1,6 @@
+kaldi_native_fbank
+mediapipe
+tqdm
+scikit-learn
+glfw
+PyOpenGL
