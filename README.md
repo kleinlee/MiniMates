@@ -1,4 +1,4 @@
-# MiniMates 数字人算法
+# MiniMates
 
 MiniMates 是一款轻量级的图片数字人驱动算法，比liveportrait、EchoMimic、MuseTalk等算法快10-100倍，支持语音驱动和表情驱动两种模式，并嵌入普通电脑实时运行，让用户能够定制自己的ai伙伴。
 
@@ -42,26 +42,40 @@ conda activate MiniMates
 pip install torch --index-url https://download.pytorch.org/whl/cu124
 pip install -r requirements.txt
 ```
+### 人像抠图（可选）
+```bash
+python interface/matting.py <img_path> <output_path>
+# eg: python interface/matting.py assets/01.jpg assets/01_rgba.png
+```
+output_path是你要保存的RGBA图片的位置。
+例如: python interface/matting.py assets/01.jpg assets/01_rgba.png
 ### 用摄像头快速尝试
 
 ```bash
 python interface/interface_face_rotation.py <img_path>
+# eg: python interface/interface_face_rotation.py assets/01_rgba.png
 ```
-你可以观测到图片的人物跟随你的头部来运动
+等待几秒钟让相机启动，你可以观测到图片的人物跟随你的头部来运动。
+
+注意img_path必须是包含RGBA四通道的图片。
 
 注意：interface/interface_face.py有相同的用法，但目前的表情驱动还不完善，所以谨慎使用，可能会获得不稳定但有趣的结果。
 ### 用一个人物的视频当做表情模版
 ```bash
 python interface/generate_move_template.py  <video_path> <template_path>
+# eg: python interface/generate_move_template.py assets/driving.mp4 assets/driving.template
 ```
-video_path是你找的模版视频，template_path则是要生成的模版文件位置
+video_path是你找的模版视频，template_path则是要生成的模版文件位置。
+
 ### 让图片人物按照语音文件和表情模版来生成视频
 ```bash
 python interface/interface_audio.py  <img_path> <wav_path> <output_path> <template_path>
+# eg: python interface/interface_audio.py  assets/01_rgba.png assets/audio.wav assets/output.mp4 assets/driving.template
 ```
 template_path是可选项，若template_path不存在，那么人物就会在头部静止状态下说话。
 ## 算法介绍
-MiniMates 采用 coarse-to-fine 的 wrap network 架构，取代传统的 dense motion 方法，以实现在 CPU 上的性能提升。此外，我们还使用 UV map 技术来提高人像的精度。
+MiniMates 采用 coarse-to-fine 的 wrap network 架构，取代传统的 dense motion 方法，以实现在 CPU 上的性能提升。
+此外，我们还使用 显式的 UV map 技术来提高人像的精度。
 ![算法架构图](#)
 ## 速度
 以下是 MiniMates 数字人算法在不同设备和推理框架下的fps表现(纯粹推理耗时)：

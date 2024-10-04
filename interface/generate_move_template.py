@@ -203,8 +203,8 @@ def run(video_path, template_path):
         n_components = len(pts_normalized_list)//2
     pca = decomposition.PCA(n_components=n_components)
     pca.fit(x)
-    print(pca.mean_)
-    print(pca.explained_variance_)
+    print("pca.mean_: ", pca.mean_)
+    print("pca.explained_variance_: ", pca.explained_variance_)
     y = pca.transform(x)
     x_reconstructed = pca.inverse_transform(y)
     # plt.figure()
@@ -225,7 +225,7 @@ def run(video_path, template_path):
     euler_angles_list = np.array(euler_angles_list)
     trans_list = np.array(trans_list)
     trans_list = trans_list - np.mean(trans_list, axis=0)
-    print(trans_list)
+    # print(trans_list)
     rotate_trans_param = np.concatenate([euler_angles_list, trans_list], axis=1)
     blendshape_verts_bias = pts_normalized_list - face_pts_mean_personal_primer
     os.makedirs(os.path.dirname(template_path), exist_ok=True)

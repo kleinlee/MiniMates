@@ -69,7 +69,8 @@ def run_audio(img_path, wavpath, output_path, template_path = None):
     if template_path is not None:
         with open(template_path, "rb") as f:
             [rotate_trans_param, blendshape_verts_bias, rect_video_face] = pickle.load(f)
-        weight_list = np.loadtxt("../obj_utils/weight_list.txt")[:, np.newaxis]
+        weight_list = os.path.join(current_dir, "../obj_utils/weight_list.txt")
+        weight_list = np.loadtxt(weight_list)[:, np.newaxis]
 
         rotate_trans_param2 = rotate_trans_param.copy()
         blendshape_verts_bias2 = blendshape_verts_bias.copy()

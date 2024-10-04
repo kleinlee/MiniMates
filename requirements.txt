@@ -4,3 +4,4 @@ tqdm
 scikit-learn
 glfw
 PyOpenGL
+onnxruntime
