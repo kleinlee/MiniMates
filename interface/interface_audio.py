@@ -152,7 +152,7 @@ def run_audio(img_path, wavpath, output_path, template_path = None):
         #     y_min = max(0, y_min)
         #     x_max = min(x_max, img_w)
         #     y_max = min(y_max, img_h)
-        print(x_min, y_min, x_max, y_max, fake_out.shape)
+        # print(x_min, y_min, x_max, y_max, fake_out.shape)
         x_min_fake, y_min_fake, x_max_fake, y_max_fake = [0, 0, fake_out.shape[1], fake_out.shape[0]]
 
         if x_min < 0:
