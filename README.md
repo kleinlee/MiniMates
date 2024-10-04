@@ -32,8 +32,7 @@ https://github.com/user-attachments/assets/7980645c-17c7-4962-bc73-8f9a985f9ca8
 ## Usage
 可以在这里获取预训练模型，并将其放在checkpoint目录下
 
-百度网盘 https://pan.baidu.com/s/1xqraihlOW4kzvpBjuoD4Yw?pwd=d48z 
-提取码：d48z 
+百度网盘 https://pan.baidu.com/s/1ZNs2MrFr04ZnvrobwDnSaw?pwd=s2rk (提取码：s2rk)
 
 ### 创建环境
 ```bash
