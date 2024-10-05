@@ -4,19 +4,16 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "true"
 current_dir = os.path.dirname(os.path.abspath(__file__))
 import sys
 sys.path.append(os.path.join(current_dir, ".."))
-from train.data.dataset_faceReenactment3 import crop_,get_image,generate_prompt,Tensor2img,adjust_verts
-import pickle
+from train.data.dataset_faceReenactment3 import generate_prompt,Tensor2img,adjust_verts
 import torch
 import uuid
 import sys
-import tqdm
 import numpy as np
 import cv2
 import os
-import glob
-import pickle
+from interface.mediapipe_blendshape import FaceMeshDetector
 device = "cuda" if torch.cuda.is_available() else "cpu"
-from interface.utils import rotate,face_interface,face_process,rotation_matrix_to_euler_angles,eularAngle2Matrix,rgb_face_process,generate_bg_mask
+from interface.utils import face_interface,face_process, generate_bg_mask
 from talkingface.run_utils import calc_face_mat
 from obj_utils.utils import generateRenderInfo,device
 
@@ -25,14 +22,14 @@ face_pts_mean = render_verts_[:478, :3]
 face_pts_mean = adjust_verts(face_pts_mean)
 teeth_verts_ = render_verts_[478:, :3]
 
-
+face_detector = FaceMeshDetector()
 
 out_size = 384
 model_size_ = 384
 current_dir = os.path.dirname(os.path.abspath(__file__))
 bg_mask = generate_bg_mask(out_size)
 tensor_bg_mask = torch.from_numpy(bg_mask).float().permute(2, 0, 1).unsqueeze(0).to(device)
-from talkingface.mediapipe_utils import detect_face_mesh
+
 
 # video_list = glob.glob(r"F:\C\AI\CV\TalkingFace\preparation\tiktok_zhongguodianyingbaodao3/*")
 # video_list.sort()
@@ -68,8 +65,26 @@ def run_avatar(img_path):
             print("无法接收帧（可能是摄像头断开）")
             break
 
-        # driving_pts_coord 为（out_size，out_size）范围内的人脸坐标
-        driving_img, driving_pts_coord = rgb_face_process(frame, out_size)
+        # # driving_pts_coord 为（out_size，out_size）范围内的人脸坐标
+        # driving_img, driving_pts_coord = rgb_face_process(frame, out_size)
+        frame = frame[:,:,::-1]
+        landmarks, blendshapes, final_morph, facial_matrixes = face_detector.detect(frame)
+        rotationMatrix = facial_matrixes[:3, :3]
+
+        blendshape_verts_driving = final_morph * 0.6
+
+        new_source_pts = source_crop_pts.copy() + blendshape_verts_driving
+        new_source_pts = new_source_pts - head_joint
+        keypoints = np.ones([3, len(new_source_pts)])
+        keypoints[:3, :] = new_source_pts.T
+        keypoints_rotated = rotationMatrix.dot(keypoints).T
+
+        # driving_pts_coord = keypoints_rotated + head_joint + blendshape_verts_driving*0.2
+        driving_pts_coord = keypoints_rotated + head_joint
+
+        driving_img = cv2.resize(frame, ((int(frame.shape[1]/frame.shape[0]*out_size)), out_size))
+        print(driving_img.shape)
+
 
         drving_prompt = generate_prompt(driving_pts_coord, mode="texture", size=out_size,
                                         ref_image=source_img, ref_vt=source_crop_pts_vt)
@@ -104,10 +119,10 @@ def run_avatar(img_path):
 
         in0 = Tensor2img(tensor_source_img[0], 0)
         # in1 = Tensor2img(tensor_source_prompt[0], 0)
-        # in2 = Tensor2img(tensor_drving_prompt[0], 0)
-        # in3 = Tensor2img(tensor_driving_img_face[0], 0)
+        in2 = Tensor2img(tensor_drving_prompt[0], 0)
+        in3 = Tensor2img(tensor_driving_img_face[0], 0)
         out = Tensor2img(fake_out[0], 0)
-        frame = np.concatenate([in0, driving_img, out], axis=1)
+        frame = np.concatenate([in0, driving_img, in2, in3, out], axis=1)
         cv2.imshow("a", frame[..., ::-1])
         cv2.waitKey(50)
 

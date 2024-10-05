@@ -1,6 +1,5 @@
 import os
 os.environ["KMP_DUPLICATE_LIB_OK"] = "true"
-os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 current_dir = os.path.dirname(os.path.abspath(__file__))
 import sys
 sys.path.append(os.path.join(current_dir, ".."))

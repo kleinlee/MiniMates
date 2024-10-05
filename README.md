@@ -2,11 +2,10 @@
 
 MiniMates 是一款轻量级的图片数字人驱动算法，比liveportrait、EchoMimic、MuseTalk等算法快10-100倍，支持语音驱动和表情驱动两种模式，并嵌入普通电脑实时运行，让用户能够定制自己的ai伙伴。
 
-## 亮点
-- **极速体验**：开源最快的数字人表情&语音驱动算法，没有之一。独立显卡、集成显卡，乃至CPU都可以实时。
-- **个性化定制**：one-shot单图驱动，最低只需要一张图片。
-- **嵌入终端**：摆脱python和cuda依赖。AI女友新生！
-
+## 🔥 更新日志
+- **`2024/10/06`**：更新了相机实时表情驱动，使用mediapipe完成ARkit表情捕捉，请尝试interface/interface_face.py！
+- **`2024/10/04`**：发布了面部推理代码，支持旋转驱动、音频驱动和混合驱动。
+- **`2024/09/24`**：发布了大模型语音对话原始程序及release包，在普通电脑上使用llama.cpp和edgeTTS完成实时语音对话。
 ## Demo 视频
 
 
@@ -21,7 +20,10 @@ https://github.com/user-attachments/assets/3bde6132-e541-4f4f-85b7-0a22bd2d97d1
 
 https://github.com/user-attachments/assets/7980645c-17c7-4962-bc73-8f9a985f9ca8
 
-
+## 亮点
+- **极速体验**：开源最快的数字人表情&语音驱动算法，没有之一。独立显卡、集成显卡，乃至CPU都可以实时。
+- **个性化定制**：one-shot单图驱动，最低只需要一张图片。
+- **嵌入终端**：摆脱python和cuda依赖。AI女友新生！
 
 ## To Do List
 - 集成至桌面软件
@@ -32,8 +34,8 @@ https://github.com/user-attachments/assets/7980645c-17c7-4962-bc73-8f9a985f9ca8
 ## Usage
 可以在这里获取预训练模型，并将其放在checkpoint目录下
 
-百度网盘 https://pan.baidu.com/s/1ZNs2MrFr04ZnvrobwDnSaw?pwd=s2rk (提取码：s2rk)
-
+百度网盘 https://pan.baidu.com/s/18stswLIZ0zyCcVWF7kTV7g?pwd=zosn  (提取码：zosn)
+--来自百度网盘超级会员V6的分享
 ### 创建环境
 ```bash
 conda create -n MiniMates python=3.12
@@ -51,14 +53,14 @@ output_path是你要保存的RGBA图片的位置。
 ### 用摄像头快速尝试
 
 ```bash
-python interface/interface_face_rotation.py <img_path>
+python interface/interface_face.py <img_path>
 # eg: python interface/interface_face_rotation.py assets/01_rgba.png
 ```
 等待几秒钟让相机启动，你可以观测到图片的人物跟随你的头部来运动。
 
 注意img_path必须是包含RGBA四通道的图片。
 
-注意：interface/interface_face.py有相同的用法，但目前的表情驱动还不完善，所以谨慎使用，可能会获得不稳定但有趣的结果。
+目前的表情驱动还不完善，所以谨慎使用，可能会获得不稳定但有趣的结果。使用的blendshape模版在checkpoint/bs_dict.pkl文件中，欢迎提出修改意见。
 ### 用一个人物的视频当做表情模版
 ```bash
 python interface/generate_move_template.py  <video_path> <template_path>
@@ -99,7 +101,7 @@ MiniMates 采用 coarse-to-fine 的 wrap network 架构，取代传统的 dense 
 - [SadTalker](#)
 
 ## License
-MiniMates 数字人算法遵循 [LICENSE](#) 协议。
+MiniMates 数字人算法遵循 MIT 协议。
 
 ---
 
