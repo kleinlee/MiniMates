@@ -112,8 +112,23 @@ def rgb_face_process(img_primer_bgr, out_size):
 #     mat_list, _, face_pts_mean_personal_primer = calc_face_mat(pts_driven, face_pts_mean)
 #     return source_img, source_crop_pts
 
+# 读取音频文件
+def load_audio(file_path):
+    import librosa
+    import numpy as np
 
-def audio_interface(wavpath):
+    # 使用 librosa 读取音频文件
+    # sr=None 表示不改变原始采样率，mono=True 表示转换为单声道
+    y, sr = librosa.load(file_path, sr=None, mono=True)
+
+    # 将采样率转换为 16kHz
+    y_16k = librosa.resample(y, orig_sr=sr, target_sr=16000)
+
+    # 确保数据类型为 float32
+    y_16k = y_16k.astype(np.float32)
+    return y_16k
+
+def audio_interface(audio_path):
     global Audio2FeatureModel,PcaModel
     if Audio2FeatureModel is None:
         current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -124,10 +139,11 @@ def audio_interface(wavpath):
         Audio2FeatureModel.load_state_dict(torch.load(ckpt_path))
         Audio2FeatureModel = Audio2FeatureModel.to(device)
         Audio2FeatureModel.eval()
-    rate, wav = wavfile.read(wavpath, mmap=False)
-
-    augmented_samples = wav
-    augmented_samples2 = augmented_samples.astype(np.float32, order='C') / 32768.0
+    # rate, wav = wavfile.read(wavpath, mmap=False)
+    #
+    # augmented_samples = wav
+    # augmented_samples2 = augmented_samples.astype(np.float32, order='C') / 32768.0
+    augmented_samples2 = load_audio(audio_path)
 
     opts = knf.FbankOptions()
     opts.frame_opts.dither = 0

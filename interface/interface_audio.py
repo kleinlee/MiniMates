@@ -32,7 +32,7 @@ face_pts_mean = render_verts_[:478, :3]
 face_pts_mean = adjust_verts(face_pts_mean)
 teeth_verts_ = render_verts_[478:, :3]
 head_joint = np.array([out_size * 0.5, out_size * 3 / 4, -0.])
-def run_audio(img_path, wavpath, output_path, template_path = None):
+def run_audio(img_path, audio_path, output_path, template_path = None):
     img_primer_rgba, source_img, source_crop_pts, source_crop_pts_vt, source_crop_coords = face_process(img_path, out_size)
 
     # print(source_img.shape)
@@ -57,7 +57,7 @@ def run_audio(img_path, wavpath, output_path, template_path = None):
     tensor_source_prompt = torch.from_numpy(source_prompt / 255.).float().permute(2, 0, 1).unsqueeze(0).to(
         device)
 
-    pts_audio_driving = audio_interface(wavpath)
+    pts_audio_driving = audio_interface(audio_path)
     frame_num = len(pts_audio_driving)
     import uuid
     task_id = str(uuid.uuid1())
@@ -183,27 +183,26 @@ def run_audio(img_path, wavpath, output_path, template_path = None):
         videoWriter.write(frame[..., ::-1])
     videoWriter.release()
     val_video = output_path
-    wav_path = wavpath
     os.system(
-        "ffmpeg -i {} -i {} -c:v libx264 -pix_fmt yuv420p {}".format(save_path, wav_path, val_video))
+        "ffmpeg -i {} -i {} -c:v libx264 -pix_fmt yuv420p {}".format(save_path, audio_path, val_video))
     os.remove(save_path)
     cv2.destroyAllWindows()
 
 def main():
     # 检查命令行参数的数量
     if len(sys.argv) < 4 or len(sys.argv) > 5:
-        print("Usage: python interface_audio.py <img_path> <wav_path> <output_path> <template_path>")
+        print("Usage: python interface_audio.py <img_path> <audio_path> <output_path> <template_path>")
         sys.exit(1)  # 参数数量不正确时退出程序
 
     img_path = sys.argv[1]
-    wav_path = sys.argv[2]
+    audio_path = sys.argv[2]
     output_path = sys.argv[3]
     if len(sys.argv) == 4:
         template_path = None
     else:
         template_path = sys.argv[4]
-    print(f"img path is set to: {img_path}, wav path is set to: {wav_path}, output path is set to: {output_path}")
-    run_audio(img_path, wav_path, output_path, template_path)
+    print(f"img path is set to: {img_path}, wav path is set to: {audio_path}, output path is set to: {output_path}")
+    run_audio(img_path, audio_path, output_path, template_path)
 
 if __name__ == "__main__":
     main()
