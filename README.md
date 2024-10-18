@@ -108,5 +108,11 @@ MiniMates 数字人算法遵循 MIT 协议。
 
 
 
-## 邮箱
-[kleinlee1@outlook.com].
+## 联系
+| 进入QQ群聊，分享看法和最新咨询。 | 加我好友，请备注“进群”，拉你进去微信交流群。 |
+|-------------------|----------------------|
+| ![QQ群聊](https://github.com/user-attachments/assets/29bfef3f-438a-4b9f-ba09-e1926d1669cb) | ![微信交流群](https://github.com/user-attachments/assets/b1f24ebb-153b-44b1-b522-14f765154110) |
+
+
+
+
