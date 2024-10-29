@@ -78,7 +78,8 @@ template_path是可选项，若template_path不存在，那么人物就会在头
 ## 算法介绍
 MiniMates 采用 coarse-to-fine 的 wrap network 架构，取代传统的 dense motion 方法，以实现在 CPU 上的性能提升。
 此外，我们还使用 显式的 UV map 技术来提高人像的精度。
-![算法架构图](#)
+![算法架构图](#)![40ae6207dd3cbee4c0df7e6474fe1c5](https://github.com/user-attachments/assets/efb0e665-4b0b-4954-b4cc-e11b35651b2c)
+
 ## 速度
 以下是 MiniMates 数字人算法在不同设备和推理框架下的fps表现(纯粹推理耗时)：
 
@@ -99,7 +100,7 @@ MiniMates 采用 coarse-to-fine 的 wrap network 架构，取代传统的 dense 
 我们感谢以下开源项目的支持：
 - [face2face-rho](#)
 - [DH_live](#)
-- [SadTalker](#)
+- [sherpa-onnx](#)
 
 ## License
 MiniMates 数字人算法遵循 MIT 协议。
