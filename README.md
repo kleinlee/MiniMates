@@ -8,7 +8,8 @@ MiniMates 是一款轻量级的图片数字人驱动算法，比liveportrait、E
 - **`2024/10/04`**：发布了面部推理代码，支持旋转驱动、音频驱动和混合驱动。
 - **`2024/09/24`**：发布了大模型语音对话原始程序及release包，在普通电脑上使用llama.cpp和edgeTTS完成实时语音对话。
 ## Demo 视频
-![1730800572065](https://github.com/user-attachments/assets/42637a0e-ba5c-41dd-bbe1-81fa0c9833ee)
+![1730800572065](https://github.com/user-attachments/assets/9a836ad0-0446-4fe6-a7fb-9b801440bbc0)
+
 
 https://github.com/user-attachments/assets/787837b9-1c18-4303-82fa-a4c23cbd0e63
 
