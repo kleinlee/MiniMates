@@ -1,4 +1,4 @@
-# MiniMates
+![1730800572065](https://github.com/user-attachments/assets/1708d2ea-9bad-40aa-b7d7-89f49cb3b091)# MiniMates
 
 MiniMates 是一款轻量级的图片数字人驱动算法，比liveportrait、EchoMimic、MuseTalk等算法快10-100倍，支持语音驱动和表情驱动两种模式，并嵌入普通电脑实时运行，让用户能够定制自己的ai伙伴。
 
@@ -8,7 +8,7 @@ MiniMates 是一款轻量级的图片数字人驱动算法，比liveportrait、E
 - **`2024/10/04`**：发布了面部推理代码，支持旋转驱动、音频驱动和混合驱动。
 - **`2024/09/24`**：发布了大模型语音对话原始程序及release包，在普通电脑上使用llama.cpp和edgeTTS完成实时语音对话。
 ## Demo 视频
-
+![1730800572065](https://github.com/user-attachments/assets/42637a0e-ba5c-41dd-bbe1-81fa0c9833ee)
 
 https://github.com/user-attachments/assets/787837b9-1c18-4303-82fa-a4c23cbd0e63
 
@@ -36,7 +36,6 @@ https://github.com/user-attachments/assets/7980645c-17c7-4962-bc73-8f9a985f9ca8
 可以在这里获取预训练模型，并将其放在checkpoint目录下
 
 百度网盘 https://pan.baidu.com/s/18stswLIZ0zyCcVWF7kTV7g?pwd=zosn  (提取码：zosn)
---来自百度网盘超级会员V6的分享
 ### 创建环境
 ```bash
 conda create -n MiniMates python=3.12
