@@ -7,20 +7,24 @@ MiniMates 是一款轻量级的图片数字人驱动算法，比liveportrait、E
 - **`2024/10/06`**：更新了相机实时表情驱动，使用mediapipe完成ARkit表情捕捉，请尝试interface/interface_face.py！
 - **`2024/10/04`**：发布了面部推理代码，支持旋转驱动、音频驱动和混合驱动。
 - **`2024/09/24`**：发布了大模型语音对话原始程序及release包，在普通电脑上使用llama.cpp和edgeTTS完成实时语音对话。
-## Demo 视频
+## Demo
+release image
 ![1730800572065](https://github.com/user-attachments/assets/9a836ad0-0446-4fe6-a7fb-9b801440bbc0)
+release video
 
+https://github.com/user-attachments/assets/d42b7893-34f1-422e-9027-b69110b97efa
+
+旋转驱动-0
 
 https://github.com/user-attachments/assets/787837b9-1c18-4303-82fa-a4c23cbd0e63
 
+旋转驱动-0
 
 https://github.com/user-attachments/assets/1a18e531-69c8-4b64-88a9-2b13bfb1c6fc
 
+面部重演+语音驱动
 
 https://github.com/user-attachments/assets/3bde6132-e541-4f4f-85b7-0a22bd2d97d1
-
-
-https://github.com/user-attachments/assets/7980645c-17c7-4962-bc73-8f9a985f9ca8
 
 ## 亮点
 - **极速体验**：开源最快的数字人表情&语音驱动算法，没有之一。独立显卡、集成显卡，乃至CPU都可以实时。
