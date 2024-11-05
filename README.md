@@ -1,4 +1,4 @@
-![1730800572065](https://github.com/user-attachments/assets/1708d2ea-9bad-40aa-b7d7-89f49cb3b091)# MiniMates
+# MiniMates
 
 MiniMates 是一款轻量级的图片数字人驱动算法，比liveportrait、EchoMimic、MuseTalk等算法快10-100倍，支持语音驱动和表情驱动两种模式，并嵌入普通电脑实时运行，让用户能够定制自己的ai伙伴。
 
